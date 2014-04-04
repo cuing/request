@@ -50,23 +50,24 @@ table {
 
 html, body {
 	font-size: 10px;
-	height: 100%;
-	overflow-x: hidden;
+}
+
+html {
+	min-height: 100%;
+	background: -webkit-linear-gradient(rgba(127,219,255,0.7), rgba(57,204,204,1));
 }
 
 header, section {
 	position: relative;
 	box-sizing:border-box;
-	padding: 3rem 5%;
+	padding: 2rem 5%;
 }
 
-header {
-	background: -webkit-linear-gradient(rgba(0,116,217,1), rgba(127,219,255,0.7));
-}
-
-section {
-	min-height: -webkit-calc(100% - 8.5rem);
-	background: -webkit-linear-gradient(rgba(127,219,255,0.7), rgba(57,204,204,1))
+header p {
+	text-align: center;
+	font-size: 1.6rem;
+	color:#FF851B;
+	line-height:1.6;
 }
 
 header h1 {
