@@ -17,6 +17,7 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
+	font-family: "Microsoft YaHei";
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -115,7 +116,7 @@ section > div:nth-child(2) li {
 section > div:nth-child(2) input {
 	font-size: 1.4rem;
 	padding: .3rem;
-	width: 14rem;
+	width: 20rem;
 }
 
 section > div:nth-child(2) input:nth-child(2) {
