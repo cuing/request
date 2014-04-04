@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	  <meta charset="utf-8">
+	  <title>调用接口</title>
+	  <link rel="stylesheet" type="text/css" href="css/index.css">  	
+  </head>
+
+  <body>
+    <header>
+    	<h1>接口调试</h1>
+    </header>
+    <section>
+      <div>
+      	<h3>请求的url地址:</h3>
+      	<input class="urlValue" type="text" list="candidateList" placeholder="请输入url名称">
+      	<datalist id="candidateList">
+      	  <option value="http://180.166.221.67/citys/sh/api/index.html"></option>
+      	  <option value="http://180.166.221.67/api/index.html">账户接口</option>
+          <option value="http://folders.pwachina.com/pwa/merchantmobile/tuijianpage/上海/begin/-1"></option>
+      	</datalist>
+      </div>
+
+      <div>
+      	<h3>请求的参数:</h3>
+      	<div>
+      		<span class="subLiNode">−</span>
+      		<span class="addLiNode">+</span>
+      	</div>
+      	<ol></ol>
+      </div>
+
+      <div>
+      	<h3>返回数据类型:</h3>
+      	<select value="string" class="respType">
+      	  <option value="string">string</option>
+      		<option value="json">json</option>
+      		<option value="jsonp">jsonp</option>
+      	</select>
+      </div>
+
+      <div>
+        <h3>开始请求:</h3>
+        <div class="requestMethod">
+	      	<button class="get">GET</button>
+	      	<button class="post">POST</button>
+      	</div>
+      </div>
+
+      <div>
+      	<h3>返回的结果:</h3>
+      	<div class="respResult"></div>
+      </div>    	
+    </section>
+    <script type="text/javascript" src="js/index.js"></script>
+  </body>
+</html>
+

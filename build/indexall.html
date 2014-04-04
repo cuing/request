@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	  <meta charset="utf-8">
+	  <title>调用接口</title>
+	  <link rel="stylesheet" type="text/css" href="css/index.css">
+	  <style type="text/css">
+
+		/* http://meyerweb.com/eric/tools/css/reset/ 
+		   v2.0 | 20110126
+		   License: none (public domain)
+		*/
+
+		html, body, div, span, applet, object, iframe,
+		h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+		a, abbr, acronym, address, big, cite, code,
+		del, dfn, em, img, ins, kbd, q, s, samp,
+		small, strike, strong, sub, sup, tt, var,
+		b, u, i, center,
+		dl, dt, dd, ol, ul, li,
+		fieldset, form, label, legend,
+		table, caption, tbody, tfoot, thead, tr, th, td,
+		article, aside, canvas, details, embed, 
+		figure, figcaption, footer, header, hgroup, 
+		menu, nav, output, ruby, section, summary,
+		time, mark, audio, video {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font-size: 100%;
+			font: inherit;
+			vertical-align: baseline;
+		}
+		/* HTML5 display-role reset for older browsers */
+		article, aside, details, figcaption, figure, 
+		footer, header, hgroup, menu, nav, section {
+			display: block;
+		}
+		body {
+			line-height: 1;
+		}
+		ol, ul, li {
+			list-style: none;
+		}
+		blockquote, q {
+			quotes: none;
+		}
+		blockquote:before, blockquote:after,
+		q:before, q:after {
+			content: '';
+			content: none;
+		}
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+
+		html, body {
+			font-size: 10px;
+			height: 100%;
+		}
+
+		header, section {
+			position: relative;
+			box-sizing:border-box;
+			padding: 3rem 5%;
+		}
+
+		header {
+			background: -webkit-linear-gradient(rgba(0,116,217,1), rgba(127,219,255,0.7));
+		}
+
+		section {
+			min-height: -webkit-calc(100% - 8.5rem);
+			background: -webkit-linear-gradient(rgba(127,219,255,0.7), rgba(57,204,204,1))
+		}
+
+		header h1 {
+			color: #2ECC40;
+			font-size: 2.6rem;
+			text-align: center;
+		}
+
+		section > div {
+			padding-top: 2rem;
+		}
+
+		section > div:nth-child(1) {
+		  margin: 0 auto;
+		  /*width: 50rem;*/
+		}
+
+		section > div:nth-child(1) input {
+			font-size: 1.6rem;
+			padding: .3rem;
+			width: 50rem;
+		}
+
+		section h3 {
+			font-size: 2.2rem;
+			padding: .8rem 0;
+			color: #B10DC9;
+			display: inline-block;
+			width: 18rem;
+		}
+
+		section > div:nth-child(2) {
+		  margin: 0 auto;
+		}
+
+		section > div:nth-child(2) ol {
+			position: relative;
+			left: 18rem;
+		}
+
+		section > div:nth-child(2) li {
+		  padding-top: 1rem;
+		}
+
+		section > div:nth-child(2) input {
+			font-size: 1.4rem;
+			padding: .3rem;
+			width: 14rem;
+		}
+
+		section > div:nth-child(2) input:nth-child(2) {
+			margin-left: 2rem;
+		}
+
+		section > div:nth-child(2) > div {
+			/*padding-top: 1.5rem;*/
+			display: inline-block;
+		}
+
+		section > div:nth-child(2) span {
+			background-color: #FF4136;
+			font-size: 3rem;
+			color: #DDDDDD;
+			display: inline-block;
+			border-radius: 1.5rem;
+			text-align: center;
+			line-height: 3rem;
+			width: 3rem;
+			height: 3rem;
+			cursor: pointer;
+		}
+
+		section > div:nth-child(2) > div span:nth-child(1) {
+		  /*margin-left: 14rem;/*/
+		}
+		section > div:nth-child(2) > div span:nth-child(2) {
+		  margin-left: 3rem;
+		}
+
+		section > div:nth-child(3) select {
+			font-size: 1.6rem;
+		}
+
+		section > div:nth-child(4) div {
+			display: inline-block;
+
+		}
+
+		section > div:nth-child(4) button {
+		  font-size: 1.6rem;
+		  padding: .5rem .8rem;  
+		}
+
+		section > div:nth-child(5) > div {
+			font-size: 1.4rem;
+		}
+
+		section > div:nth-child(5) ul {
+			padding-left: 2rem;
+		}
+
+		section > div:nth-child(5) li {
+			padding-left: 2rem;
+		}
+	  </style>
+  </head>
+
+  <body>
+    <header>
+    	<h1>接口调试</h1>
+    </header>
+    <section>
+      <div>
+      	<h3>请求的url地址:</h3>
+      	<input class="urlValue" type="text" list="candidateList" placeholder="请输入url名称">
+      	<datalist id="candidateList">
+      	  <option value="http://180.166.221.67/citys/sh/api/index.html"></option>
+      	  <option value="http://180.166.221.67/api/index.html">账户接口</option>
+      	</datalist>
+      </div>
+
+      <div>
+      	<h3>请求的参数:</h3>
+      	<div>
+      		<span class="subLiNode">−</span>
+      		<span class="addLiNode">+</span>
+      	</div>
+      	<ol></ol>
+      </div>
+
+      <div>
+      	<h3>返回数据类型:</h3>
+      	<select value="string" class="respType">
+      	  <option value="string">string</option>
+      		<option value="json">json</option>
+      		<option value="jsonp">jsonp</option>
+      	</select>
+      </div>
+
+      <div>
+        <h3>开始请求:</h3>
+        <div class="requestMethod">
+	      	<button class="get">GET</button>
+	      	<button class="post">POST</button>
+      	</div>
+      </div>
+
+      <div>
+      	<h3>返回的结果:</h3>
+      	<div class="respResult"></div>
+      </div>    	
+    </section>
+    <script type="text/javascript">
+        'use strict';
+        (function mainFunc () {
+          var subObj = document.querySelector('.subLiNode');
+          var addObj = document.querySelector('.addLiNode');
+          var liParent = document.querySelector('ol');
+          var requestMethod = document.querySelector('.requestMethod');
+          var urlObj = document.querySelector('.urlValue');
+          var respType = document.querySelector('.respType');
+          var respResult = document.querySelector('.respResult');
+          var toStr = Object.prototype.toString;
+
+          function creatLiNode() {
+            var frag = document.createDocumentFragment();
+            var params = document.createElement('li');
+            var paramKey = document.createElement('input');
+            var paramValue = paramKey.cloneNode(true);
+            var select = document.createElement('select');
+            var optionS = document.createElement('option');
+            var optionO = optionS.cloneNode(true);
+            var optionB = optionS.cloneNode(true);
+            var textS = document.createTextNode('string');
+            var textO = document.createTextNode('object');
+            var textB = document.createTextNode('boolean');
+            optionS.setAttribute('value', 'string');
+            optionS.appendChild(textS);
+            optionB.setAttribute('value', 'boolean');
+            optionB.appendChild(textB);
+            optionO.setAttribute('value', 'object');
+            optionO.appendChild(textO);
+            select.setAttribute('value', 'string');
+            select.appendChild(optionS);
+            select.appendChild(optionO);
+            select.appendChild(optionB);
+
+            paramKey.setAttribute('class', 'param-key');
+            paramKey.setAttribute('placeholder', '参数名称');
+            paramValue.setAttribute('class', 'param-value');
+            paramValue.setAttribute('placeholder', '参数值');
+
+            params.setAttribute('class', 'params');
+            params.appendChild(paramKey);
+            params.appendChild(paramValue);
+            params.appendChild(select);
+            frag.appendChild(params);
+            return frag;
+          }
+
+          function removeLiNode() {
+            var cns = liParent.childNodes,
+                l = cns.length,
+                i = l - 1;
+            for (; i >= 0; i--) {
+              var item = cns[i];
+              if (item.nodeType === 1) {
+                item.remove();
+                break;
+              }
+            }
+          }
+
+          function filterData(method) {
+            var cns = liParent.childNodes,
+                i = 0,
+                l = cns.length,
+                cnsPost = {},
+                cnsGet = '',
+                isObj = false;
+
+            if (method == 'post') {
+              isObj = true;
+            }
+
+            for (; i < l; i++) {
+              var item = cns[i];
+              var key = item.querySelector('.param-key').value;
+              if (!key) {
+                continue;
+              }
+              var value = item.querySelector('.param-value').value.trim();
+              var type = item.querySelector('select').value.trim();
+              if (isObj) {
+                if (type === 'object') {
+                  try {
+                    value = JSON.parse(value);
+                  } catch (err) {
+                    console.log(err);
+                  }
+                }
+
+                if (type === 'boolean') {
+                  if (!!value) {
+                    value = true;
+                  } else {
+                    value = false;
+                  }
+                }
+                cnsPost[key] = value;
+              } else {
+                cnsGet += key + '=' + value + '&';
+              }
+            }
+
+            if (isObj) {
+              return cnsPost;
+            }
+            return cnsGet;
+          }
+
+          function createElement(eleName, text, cn) {
+            var ele = document.createElement(eleName),
+                txt;
+            if (cn) {
+              ele.setAttribute('class', cn);
+            }
+            if (text) {
+              txt = document.createTextNode(text);
+              ele.appendChild(txt);
+            }
+            return ele;
+          }
+
+          function jsontohtml(data, ele) {
+            if (Array.isArray(data)) {
+              var i = 0,
+                  l = data.length;
+              var collapse = createElement('div', '[', 'collapse');
+              ele.appendChild(collapse);
+              for (; i < l; i++) {
+                var liele = createElement('li');
+                var item = data[i];
+                var iValue;
+                if (item !== null && typeof item === 'object') {
+                  iValue = createElement('ul');
+                  liele.appendChild(iValue);
+                  ele.appendChild(liele);
+                  jsontohtml(item, iValue);
+                } else {
+                  iValue = createElement('span', item + ',', + 'arrayValue');
+                  liele.appendChild(iValue);
+                  ele.appendChild(liele);
+                }
+              }
+              var collapseClose = createElement('div', '],', 'collapse');
+              ele.appendChild(collapseClose);
+            } else if (toStr.call(data) === '[object Object]') {
+              var collapseOpen = createElement('div', '{', 'collapse');
+              ele.appendChild(collapseOpen);
+              for (var j in data) {
+                if (data.hasOwnProperty(j)) {
+                  var jtem = data[j];
+                  var liele = createElement('li');
+                  if (jtem !== null && typeof jtem === 'object') {
+                    var jprop = createElement('div', j + ': ', 'divProp');
+                    var jValue = createElement('ul');
+                    liele.appendChild(jprop);
+                    liele.appendChild(jValue);
+                    ele.appendChild(liele);
+                    jsontohtml(jtem, jValue);
+                  } else {
+                    var jprop = createElement('span', j + ': ', 'spanProp');
+                    var jValue = createElement('span', jtem + ',', 'spanValue');
+                    liele.appendChild(jprop);
+                    liele.appendChild(jValue);
+                    ele.appendChild(liele);
+                  }
+                }
+              }
+              var collapseClose = createElement('div', '},', 'collapse');
+              ele.appendChild(collapseClose);
+            }
+          }
+
+          function callback(obj) {
+            return obj;
+          }
+
+          function requestActive(method) {
+            function handler() {
+              var result;
+              var rt = respType.value;
+              if (rt === 'string') {
+                respResult.innerText = xhr.response;
+                return;
+              } else {
+                try {
+                  result = rt === 'jsonp' ? eval(xhr.response) : JSON.parse(xhr.response);
+                } catch(err) {
+                  console.log(err);
+                  alert('返回数据格式正确');
+                  return false;
+                }
+
+                var ule = createElement('ul');
+                respResult.appendChild(ule);
+                jsontohtml(result, ule);
+              }
+            }
+            if (!urlObj.value.trim()) {
+              return false;
+            }
+            var xhr = new XMLHttpRequest();
+            xhr.onload = handler;
+            var urls = urlObj.value.trim();
+
+            if (method === 'get') {
+              if (urls[urls.length - 1] !== '?') {
+                urls += '?';
+              }
+              urls += filterData();
+              xhr.open('get', urls, true);
+              xhr.send(null);
+            } else {
+              xhr.open('post', urls, true);
+              var data = filterData('post');
+              xhr.send(data);
+            }
+          }
+
+          var liNode = creatLiNode();
+
+          function addEvent() {
+            subObj.addEventListener('click', function() {
+              removeLiNode();
+            }, false);
+
+            addObj.addEventListener('click', function() {
+              liParent.appendChild(liNode.cloneNode(true));
+            }, false);
+
+            requestMethod.addEventListener('click', function(e) {
+              var bt = e.srcElement;
+              if (bt.nodeType !== 1) {
+                return false;
+              }
+              var cn = bt.className;
+              cn === 'get' ? requestActive('get') : requestActive('post');
+            }, false);
+          }
+          addEvent();
+        }());
+    </script>
+  </body>
+</html>
+

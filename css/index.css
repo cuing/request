@@ -1,0 +1,172 @@
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul, li {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+html, body {
+	font-size: 10px;
+	height: 100%;
+	overflow-x: hidden;
+}
+
+header, section {
+	position: relative;
+	box-sizing:border-box;
+	padding: 3rem 5%;
+}
+
+header {
+	background: -webkit-linear-gradient(rgba(0,116,217,1), rgba(127,219,255,0.7));
+}
+
+section {
+	min-height: -webkit-calc(100% - 8.5rem);
+	background: -webkit-linear-gradient(rgba(127,219,255,0.7), rgba(57,204,204,1))
+}
+
+header h1 {
+	color: #2ECC40;
+	font-size: 2.6rem;
+	text-align: center;
+}
+
+section > div {
+	padding-top: 2rem;
+}
+
+section > div:nth-child(1) {
+  margin: 0 auto;
+  /*width: 50rem;*/
+}
+
+section > div:nth-child(1) input {
+	font-size: 1.6rem;
+	padding: .3rem;
+	width: 55rem;
+}
+
+section h3 {
+	font-size: 2.2rem;
+	padding: .8rem 0;
+	color: #B10DC9;
+	display: inline-block;
+	width: 18rem;
+}
+
+section > div:nth-child(2) {
+  margin: 0 auto;
+}
+
+section > div:nth-child(2) ol {
+	position: relative;
+	left: 18rem;
+}
+
+section > div:nth-child(2) li {
+  padding-top: 1rem;
+}
+
+section > div:nth-child(2) input {
+	font-size: 1.4rem;
+	padding: .3rem;
+	width: 14rem;
+}
+
+section > div:nth-child(2) input:nth-child(2) {
+	margin-left: 2rem;
+}
+
+section > div:nth-child(2) > div {
+	/*padding-top: 1.5rem;*/
+	display: inline-block;
+}
+
+section > div:nth-child(2) span {
+	background-color: #FF4136;
+	font-size: 3rem;
+	color: #DDDDDD;
+	display: inline-block;
+	border-radius: 1.5rem;
+	text-align: center;
+	line-height: 3rem;
+	width: 3rem;
+	height: 3rem;
+	cursor: pointer;
+}
+
+section > div:nth-child(2) > div span:nth-child(1) {
+  /*margin-left: 14rem;/*/
+}
+section > div:nth-child(2) > div span:nth-child(2) {
+  margin-left: 3rem;
+}
+
+section > div:nth-child(3) select {
+	font-size: 1.6rem;
+}
+
+section > div:nth-child(4) div {
+	display: inline-block;
+}
+
+section > div:nth-child(4) button {
+  font-size: 1.6rem;
+  padding: .5rem .8rem;  
+}
+
+section > div:nth-child(5) > div {
+	font-size: 1.4rem;
+}
+
+section > div:nth-child(5) ul {
+	padding-left: 2rem;
+}
+
+section > div:nth-child(5) li {
+	padding-left: 2rem;
+}
