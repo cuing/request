@@ -174,7 +174,7 @@
       var collapseClose = createE('div');
       var ct = document.createTextNode(']');
       collapseClose.setAttribute('class', 'collapse');
-      collapseClose.appendChild('ct');
+      collapseClose.appendChild(ct);
       ele.appendChild(collapseClose);
     } else if (toStr.call(data) === '[object Object]') {
       var collapseOpen = createE('div');
