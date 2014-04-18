@@ -97,6 +97,7 @@ section > div:nth-child(1) input {
 section > div:nth-child(1) span {
 	font-size: 1.8rem;
 	color: #2ECC40;
+	cursor: pointer;
 }
 
 section h3 {
@@ -131,7 +132,6 @@ section > div:nth-child(2) input:nth-child(2) {
 }
 
 section > div:nth-child(2) > div {
-	/*padding-top: 1.5rem;*/
 	display: inline-block;
 }
 
