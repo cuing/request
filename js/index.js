@@ -36,7 +36,7 @@
     // paramKey.setAttribute('class', 'param-key');
     paramKey.setAttribute('placeholder', '参数名称');
     // paramValue.setAttribute('class', 'param-value');
-    paramKey.classList.add('param-value');
+    paramValue.classList.add('param-value');
     paramValue.setAttribute('placeholder', '参数值');
 
     params.classList.add('params');
@@ -93,7 +93,7 @@
 
     for (; i < l; i++) {
       var item = cns[i];
-      var key = item.querySelector('.param-key').value.trim();
+      var key = item.querySelector('.param-key').value;
       if (!key) {
         continue;
       }
@@ -246,7 +246,6 @@
         }
 
         var ule = createE('ul');
-        respResult.html('');
         respResult.appendChild(ule);
         jsontohtml(result, ule);
       }
@@ -276,7 +275,7 @@
 
   function addEvent() {
     subObj.addEventListener('click', function() {
-      removeNode();
+      removeLiNode();
     }, false);
 
     addObj.addEventListener('click', function() {
