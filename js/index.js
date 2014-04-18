@@ -7,6 +7,8 @@
   var urlObj = selector('.urlValue');
   var respType = selector('.respType');
   var respResult = selector('.respResult');
+  var addToList = selector('.addToList');
+  var candidateList = getId('candidateList');
   var toStr = Object.prototype.toString;
 
   function creatLiNode() {
@@ -50,6 +52,10 @@
 
   function selector(sel) {
     return document.querySelector(sel);
+  }
+
+  function getId(sel) {
+    return document.getElementById(sel)
   }
   
   // 元素节点
@@ -236,8 +242,12 @@
       if (rt === 'string') {
         respResult.innerText = xhr.response;
         return;
+      } else if (rt ==='html') {
+        respResult.innerHTML = xhr.response;
+
       } else {
         try {
+
           result = rt === 'jsonp' ? eval(xhr.response) : JSON.parse(xhr.response);
         } catch(err) {
           console.log(err);
@@ -259,6 +269,9 @@
     var urls = urlObj.value.trim();
 
     if (method === 'get') {
+      if (urls.indexOf('www') === 0) {
+        urls = 'http://' + urls;
+      }
       if (urls[urls.length - 1] !== '?') {
         urls += '?';
       }
@@ -290,6 +303,35 @@
       }
       var cn = bt.className;
       cn === 'get' ? requestActive('get') : requestActive('post');
+    }, false);
+
+    addToList.addEventListener('click', function() {
+      var url = urlObj.value.trim();
+      var urlReg = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+      if (urlReg.test(url)) {
+        var urlList = localStorage.getItem('urlList') ? JSON.parse(localStorage.getItem('urlList')) : [];
+        var idx = urlList.indexOf(url);
+        if (idx > -1) {
+          urlList.splice(idx, 1);
+          var cacheLi = candidateList.querySelector('option[value="' + url + '"]');
+          if (cacheLi) {
+            cacheLi.remove();
+            cacheLi = null;
+          }
+        }
+        urlList.unshift(url);
+        localStorage.setItem('urlList', JSON.stringify(urlList));
+        var opt = createE('option');
+        opt.setAttribute('value', url);
+        if (candidateList.firstElementChild) {
+          candidateList.insertBefore(opt, candidateList.firstElementChild);
+        } else {
+          candidateList.appendChild(opt);
+        }
+
+      }
+
+      return false;
     }, false);
   }
   addEvent();
