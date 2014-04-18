@@ -55,26 +55,28 @@ html, body {
 
 html {
 	min-height: 100%;
-	background: -webkit-linear-gradient(rgba(127,219,255,0.7), rgba(57,204,204,1));
+	background-color: #DDD;
+	/*background: -webkit-linear-gradient(rgba(127,219,255,0.7), rgba(57,204,204,1));*/
 }
 
 header, section {
 	position: relative;
 	box-sizing:border-box;
-	padding: 2rem 5%;
+	padding: 1.5rem 5%;
 }
 
 header p {
-	text-align: center;
+	/*text-align: center;*/
 	font-size: 1.6rem;
-	color:#FF851B;
+	color:#333;
 	line-height:1.6;
 }
 
 header h1 {
-	color: #2ECC40;
+	color: #111;
 	font-size: 2.6rem;
-	text-align: center;
+	padding-bottom: 1rem;
+	/*text-align: center;*/
 }
 
 section > div {
@@ -95,7 +97,7 @@ section > div:nth-child(1) input {
 section h3 {
 	font-size: 2.2rem;
 	padding: .8rem 0;
-	color: #B10DC9;
+	color: #111;
 	display: inline-block;
 	width: 18rem;
 }
@@ -129,7 +131,7 @@ section > div:nth-child(2) > div {
 }
 
 section > div:nth-child(2) span {
-	background-color: #FF4136;
+	background-color: #0074D9;
 	font-size: 3rem;
 	color: #DDDDDD;
 	display: inline-block;
@@ -141,9 +143,6 @@ section > div:nth-child(2) span {
 	cursor: pointer;
 }
 
-section > div:nth-child(2) > div span:nth-child(1) {
-  /*margin-left: 14rem;/*/
-}
 section > div:nth-child(2) > div span:nth-child(2) {
   margin-left: 3rem;
 }
