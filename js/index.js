@@ -93,7 +93,7 @@
 
     for (; i < l; i++) {
       var item = cns[i];
-      var key = item.querySelector('.param-key').value;
+      var key = item.querySelector('.param-key').value.trim();
       if (!key) {
         continue;
       }
