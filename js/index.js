@@ -206,7 +206,7 @@
             jprop.appendChild(jt);
 
             var jValue = createE('span');
-            jtt = document.createTextNode(jtem + ',');
+            var jtt = document.createTextNode(jtem + ',');
             jValue.setAttribute('class', 'spanValue');
             jValue.appendChild(jtt);
 
