@@ -247,6 +247,7 @@
 
         var ule = createE('ul');
         respResult.appendChild(ule);
+        respResult.innerHTML = '';
         jsontohtml(result, ule);
       }
     }
