@@ -1,26 +1,26 @@
 'use strict';
 (function mainFunc () {
-  var subObj = document.querySelector('.subLiNode');
-  var addObj = document.querySelector('.addLiNode');
-  var liParent = document.querySelector('ol');
-  var requestMethod = document.querySelector('.requestMethod');
-  var urlObj = document.querySelector('.urlValue');
-  var respType = document.querySelector('.respType');
-  var respResult = document.querySelector('.respResult');
+  var subObj = selector('.subLiNode');
+  var addObj = selector('.addLiNode');
+  var liParent = selector('ol');
+  var requestMethod = selector('.requestMethod');
+  var urlObj = selector('.urlValue');
+  var respType = selector('.respType');
+  var respResult = selector('.respResult');
   var toStr = Object.prototype.toString;
 
   function creatLiNode() {
     var frag = document.createDocumentFragment();
-    var params = document.createElement('li');
-    var paramKey = document.createElement('input');
+    var params = createE('li');
+    var paramKey = createE('input');
     var paramValue = paramKey.cloneNode(true);
-    var select = document.createElement('select');
-    var optionS = document.createElement('option');
+    var select = createE('select');
+    var optionS = createE('option');
     var optionO = optionS.cloneNode(true);
     var optionB = optionS.cloneNode(true);
-    var textS = document.createTextNode('string');
-    var textO = document.createTextNode('object');
-    var textB = document.createTextNode('boolean');
+    var textS = createT('string');
+    var textO = createT('object');
+    var textB = createT('boolean');
     optionS.setAttribute('value', 'string');
     optionS.appendChild(textS);
     optionB.setAttribute('value', 'boolean');
@@ -32,12 +32,15 @@
     select.appendChild(optionO);
     select.appendChild(optionB);
 
-    paramKey.setAttribute('class', 'param-key');
+    paramKey.classList.add('param-key');
+    // paramKey.setAttribute('class', 'param-key');
     paramKey.setAttribute('placeholder', '参数名称');
-    paramValue.setAttribute('class', 'param-value');
+    // paramValue.setAttribute('class', 'param-value');
+    paramKey.classList.add('param-value');
     paramValue.setAttribute('placeholder', '参数值');
 
-    params.setAttribute('class', 'params');
+    params.classList.add('params');
+    // params.setAttribute('class', 'params');
     params.appendChild(paramKey);
     params.appendChild(paramValue);
     params.appendChild(select);
@@ -45,10 +48,28 @@
     return frag;
   }
 
+  function selector(sel) {
+    return document.querySelector(sel);
+  }
+  
+  // 元素节点
+  function createE(name) {
+    return document.createElement(name);
+  }
+
+  // 文本节点
+  function createT(str) {
+    return document.createTextNode(str);
+  }
+
+  function addClass(el, cname) {
+    el.classList && el.classList.add(cname);
+  }
+
   function removeLiNode() {
     var cns = liParent.childNodes,
-        l = cns.length,
-        i = l - 1;
+        len = cns.length,
+        i = len - 1;
     for (; i >= 0; i--) {
       var item = cns[i];
       if (item.nodeType === 1) {
@@ -72,7 +93,7 @@
 
     for (; i < l; i++) {
       var item = cns[i];
-      var key = item.querySelector('.param-key').value;
+      var key = item.querySelector('.param-key').value.trim();
       if (!key) {
         continue;
       }
@@ -123,49 +144,83 @@
     if (Array.isArray(data)) {
       var i = 0,
           l = data.length;
-      var collapse = createElement('div', '[', 'collapse');
+      var collapse = createE('div');
+      var ct = document.createTextNode('[');
+      collapse.setAttribute('class', 'collapse');
+      collapse.appendChild(ct);
       ele.appendChild(collapse);
       for (; i < l; i++) {
-        var liele = createElement('li');
+        var liele = createE('li');
         var item = data[i];
         var iValue;
         if (item !== null && typeof item === 'object') {
-          iValue = createElement('ul');
+          // iValue = createElement('ul');
+          iValue = createE('ul');
           liele.appendChild(iValue);
           ele.appendChild(liele);
           jsontohtml(item, iValue);
         } else {
-          iValue = createElement('span', item + ',', + 'arrayValue');
+          iValue = createE('span');
+          var it = document.createTextNode(item+',');
+          iValue.setAttribute('class', 'arrayValue');
+          iValue.appendChild(it);
+          // iValue = createElement('span', item + ',', + 'arrayValue');
           liele.appendChild(iValue);
           ele.appendChild(liele);
         }
       }
-      var collapseClose = createElement('div', '],', 'collapse');
+
+      // var collapseClose = createElement('div', '],', 'collapse');
+      var collapseClose = createE('div');
+      var ct = document.createTextNode(']');
+      collapseClose.setAttribute('class', 'collapse');
+      collapseClose.appendChild('ct');
       ele.appendChild(collapseClose);
     } else if (toStr.call(data) === '[object Object]') {
-      var collapseOpen = createElement('div', '{', 'collapse');
+      var collapseOpen = createE('div');
+      var ct = document.createTextNode('{');
+      collapseOpen.setAttribute('class', 'collapse');
+      collapseOpen.appendChild(ct);
+      // var collapseOpen = createElement('div', '{', 'collapse');
       ele.appendChild(collapseOpen);
       for (var j in data) {
         if (data.hasOwnProperty(j)) {
           var jtem = data[j];
-          var liele = createElement('li');
+          var liele = createE('li');
+          // var liele = createElement('li');
           if (jtem !== null && typeof jtem === 'object') {
-            var jprop = createElement('div', j + ': ', 'divProp');
-            var jValue = createElement('ul');
+            var jprop = createE('div');
+            var jt = document.createTextNode(j + ': ');
+            jprop.setAttribute('class', 'divProp');
+            jprop.appendChild(jt);
+
+            var jValue = createE('ul');
             liele.appendChild(jprop);
             liele.appendChild(jValue);
             ele.appendChild(liele);
             jsontohtml(jtem, jValue);
           } else {
-            var jprop = createElement('span', j + ': ', 'spanProp');
-            var jValue = createElement('span', jtem + ',', 'spanValue');
+            var jprop = createE('span');
+            var jt = document.createTextNode(j + ': ');
+            jprop.setAttribute('class', 'spanProp');
+            jprop.appendChild(jt);
+
+            var jValue = createE('span');
+            jtt = document.createTextNode(jtem + ',');
+            jValue.setAttribute('class', 'spanValue');
+            jValue.appendChild(jtt);
+
             liele.appendChild(jprop);
             liele.appendChild(jValue);
             ele.appendChild(liele);
           }
         }
       }
-      var collapseClose = createElement('div', '},', 'collapse');
+      var collapseClose = createE('div');
+      var ct = document.createTextNode('}');
+      collapseClose.setAttribute('class', 'collapse');
+      collapseClose.appendChild(ct);
+      // var collapseClose = createElement('div', '},', 'collapse');
       ele.appendChild(collapseClose);
     }
   }
@@ -190,7 +245,8 @@
           return false;
         }
 
-        var ule = createElement('ul');
+        var ule = createE('ul');
+        respResult.html('');
         respResult.appendChild(ule);
         jsontohtml(result, ule);
       }
@@ -220,7 +276,7 @@
 
   function addEvent() {
     subObj.addEventListener('click', function() {
-      removeLiNode();
+      removeNode();
     }, false);
 
     addObj.addEventListener('click', function() {
