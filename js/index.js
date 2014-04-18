@@ -246,8 +246,8 @@
         }
 
         var ule = createE('ul');
-        respResult.appendChild(ule);
         respResult.innerHTML = '';
+        respResult.appendChild(ule);
         jsontohtml(result, ule);
       }
     }
