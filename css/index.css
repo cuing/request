@@ -176,3 +176,14 @@ section > div:nth-child(5) ul {
 section > div:nth-child(5) li {
 	padding-left: 2rem;
 }
+
+.errorMsg {
+	position: absolute;
+	top: 10rem;
+	left: 30%;
+	padding: 2rem;
+	font-size: 3rem;
+	color: #fff;
+	border-radius: 1rem;
+	background: rgba(1,1,1, 0.5);
+}

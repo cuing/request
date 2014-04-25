@@ -1,5 +1,24 @@
 'use strict';
 (function mainFunc () {
+
+  function selector(sel) {
+    return document.querySelector(sel);
+  }
+
+  function getId(sel) {
+    return document.getElementById(sel);
+  }
+  
+  // 元素节点
+  function createE(name) {
+    return document.createElement(name);
+  }
+
+  // 文本节点
+  function createT(str) {
+    return document.createTextNode(str);
+  }
+
   var subObj = selector('.subLiNode');
   var addObj = selector('.addLiNode');
   var liParent = selector('ol');
@@ -35,14 +54,11 @@
     select.appendChild(optionB);
 
     paramKey.classList.add('param-key');
-    // paramKey.setAttribute('class', 'param-key');
     paramKey.setAttribute('placeholder', '参数名称');
-    // paramValue.setAttribute('class', 'param-value');
     paramValue.classList.add('param-value');
     paramValue.setAttribute('placeholder', '参数值');
 
     params.classList.add('params');
-    // params.setAttribute('class', 'params');
     params.appendChild(paramKey);
     params.appendChild(paramValue);
     params.appendChild(select);
@@ -50,27 +66,6 @@
     return frag;
   }
 
-  function selector(sel) {
-    return document.querySelector(sel);
-  }
-
-  function getId(sel) {
-    return document.getElementById(sel)
-  }
-  
-  // 元素节点
-  function createE(name) {
-    return document.createElement(name);
-  }
-
-  // 文本节点
-  function createT(str) {
-    return document.createTextNode(str);
-  }
-
-  function addClass(el, cname) {
-    el.classList && el.classList.add(cname);
-  }
 
   function removeLiNode() {
     var cns = liParent.childNodes,
@@ -133,34 +128,21 @@
     return cnsGet;
   }
 
-  function createElement(eleName, text, cn) {
-    var ele = document.createElement(eleName),
-        txt;
-    if (cn) {
-      ele.setAttribute('class', cn);
-    }
-    if (text) {
-      txt = document.createTextNode(text);
-      ele.appendChild(txt);
-    }
-    return ele;
-  }
-
   function jsontohtml(data, ele) {
+    var ct, liele, collapseClose;
     if (Array.isArray(data)) {
       var i = 0,
           l = data.length;
       var collapse = createE('div');
-      var ct = document.createTextNode('[');
+      ct = document.createTextNode('[');
       collapse.setAttribute('class', 'collapse');
       collapse.appendChild(ct);
       ele.appendChild(collapse);
       for (; i < l; i++) {
-        var liele = createE('li');
+        liele = createE('li');
         var item = data[i];
         var iValue;
         if (item !== null && typeof item === 'object') {
-          // iValue = createElement('ul');
           iValue = createE('ul');
           liele.appendChild(iValue);
           ele.appendChild(liele);
@@ -170,48 +152,46 @@
           var it = document.createTextNode(item+',');
           iValue.setAttribute('class', 'arrayValue');
           iValue.appendChild(it);
-          // iValue = createElement('span', item + ',', + 'arrayValue');
           liele.appendChild(iValue);
           ele.appendChild(liele);
         }
       }
 
-      // var collapseClose = createElement('div', '],', 'collapse');
-      var collapseClose = createE('div');
-      var ct = document.createTextNode(']');
+      collapseClose = createE('div');
+      ct = document.createTextNode(']');
       collapseClose.setAttribute('class', 'collapse');
       collapseClose.appendChild(ct);
       ele.appendChild(collapseClose);
     } else if (toStr.call(data) === '[object Object]') {
       var collapseOpen = createE('div');
-      var ct = document.createTextNode('{');
+      var jprop, jt;
+      ct = document.createTextNode('{');
       collapseOpen.setAttribute('class', 'collapse');
       collapseOpen.appendChild(ct);
-      // var collapseOpen = createElement('div', '{', 'collapse');
       ele.appendChild(collapseOpen);
       for (var j in data) {
         if (data.hasOwnProperty(j)) {
           var jtem = data[j];
-          var liele = createE('li');
-          // var liele = createElement('li');
+          liele = createE('li');
+          var jValue;
           if (jtem !== null && typeof jtem === 'object') {
-            var jprop = createE('div');
-            var jt = document.createTextNode(j + ': ');
+            jprop = createE('div');
+            jt = document.createTextNode(j + ': ');
             jprop.setAttribute('class', 'divProp');
             jprop.appendChild(jt);
 
-            var jValue = createE('ul');
+            jValue = createE('ul');
             liele.appendChild(jprop);
             liele.appendChild(jValue);
             ele.appendChild(liele);
             jsontohtml(jtem, jValue);
           } else {
-            var jprop = createE('span');
-            var jt = document.createTextNode(j + ': ');
+            jprop = createE('span');
+            jt = document.createTextNode(j + ': ');
             jprop.setAttribute('class', 'spanProp');
             jprop.appendChild(jt);
 
-            var jValue = createE('span');
+            jValue = createE('span');
             var jtt = document.createTextNode(jtem + ',');
             jValue.setAttribute('class', 'spanValue');
             jValue.appendChild(jtt);
@@ -222,17 +202,32 @@
           }
         }
       }
-      var collapseClose = createE('div');
-      var ct = document.createTextNode('}');
+      collapseClose = createE('div');
+      ct = document.createTextNode('}');
       collapseClose.setAttribute('class', 'collapse');
       collapseClose.appendChild(ct);
-      // var collapseClose = createElement('div', '},', 'collapse');
       ele.appendChild(collapseClose);
     }
   }
 
   function callback(obj) {
     return obj;
+  }
+
+  function jsonpRequest(xyUrl, callback) {
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = xyUrl;
+    //借鉴了jQuery的script跨域方法
+    script.onload = script.onreadystatechange = function(){
+        if((!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete')){
+            callback && callback();
+            if ( head && script.parentNode ) {
+                head.removeChild( script );
+            }
+        }
+    };
   }
 
   function requestActive(method) {
@@ -247,11 +242,10 @@
 
       } else {
         try {
-
           result = rt === 'jsonp' ? eval(xhr.response) : JSON.parse(xhr.response);
         } catch(err) {
           console.log(err);
-          alert('返回数据格式正确');
+          showErrorMsg('返回数据格式正确');
           return false;
         }
 
@@ -285,9 +279,20 @@
     }
   }
 
-  var liNode = creatLiNode();
+  function showErrorMsg(msg) {
+    var pe = createE('p');
+    var errorMsg = createT(msg);
+    pe.appendChild(errorMsg);
+    pe.classList.add('errorMsg');
+    selector('section').appendChild(pe);
+    setTimeout(function() {
+      pe.parentNode.removeChild(pe);
+    }, 3000);
+  }
 
   function addEvent() {
+    var liNode = creatLiNode();
+
     subObj.addEventListener('click', function() {
       removeLiNode();
     }, false);
@@ -328,7 +333,8 @@
         } else {
           candidateList.appendChild(opt);
         }
-
+      } else {
+        showErrorMsg('URL有错误');
       }
 
       return false;
