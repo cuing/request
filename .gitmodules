@@ -1,0 +1,6 @@
+[submodule "request"]
+	path = request
+	url = https://github.com/cuing/request.git
+[submodule "csapp"]
+	path = csapp
+	url = https://github.com/cuing/csapp.git
